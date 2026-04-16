@@ -7,6 +7,7 @@ import { DeleteBookUseCase } from './application/use-cases/books/delete-book/del
 import { GetBookUseCase } from './application/use-cases/books/get-book/get-book.use-case';
 import { ListBooksUseCase } from './application/use-cases/books/list-books/list-books.use-case';
 import { UpdateBookUseCase } from './application/use-cases/books/update-book/update-book.use-case';
+import { ProcessPaymentUseCase } from './application/use-cases/payment/process-payment.use-case';
 import { BookEntity } from './infrastructure/database/postgres/entities/book.entity';
 import { CreateBookRepository } from './infrastructure/database/postgres/repositories/books/create-book.repository';
 import { DeleteBookRepository } from './infrastructure/database/postgres/repositories/books/delete-book.repository';
@@ -14,9 +15,10 @@ import { GetBookRepository } from './infrastructure/database/postgres/repositori
 import { ListBooksRepository } from './infrastructure/database/postgres/repositories/books/list-books.repository';
 import { UpdateBookRepository } from './infrastructure/database/postgres/repositories/books/update-book.repository';
 import { BooksController } from './presentation/controllers/books/books.controller';
+import { PaymentController } from './presentation/controllers/payment/payment.controller';
 
 @Module({
-  controllers: [BooksController],
+  controllers: [BooksController, PaymentController],
   providers: [
     {
       provide: 'ICreateBookRepository',
@@ -38,6 +40,7 @@ import { BooksController } from './presentation/controllers/books/books.controll
       provide: 'IDeleteBookRepository',
       useClass: DeleteBookRepository,
     },
+    ProcessPaymentUseCase,
     CreateBookUseCase,
     GetBookUseCase,
     ListBooksUseCase,
